@@ -117,10 +117,9 @@ export default function PaymentForm({Introsteps}) {
     } else{
       setTransportType(transportType);
       try {
-        fetch('/api/v1/service/aks-shippingia/score', {
+        fetch('http://190.223.58.252:5000/api/v1/service/aks-shippingia/score', {
           method: 'POST',
           headers: {
-            'Authorization': 'Bearer 7fSDPRkvyknLR5qWvDtQ6gcB8J7sTb4T',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
