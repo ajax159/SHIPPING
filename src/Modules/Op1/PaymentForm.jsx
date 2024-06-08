@@ -120,8 +120,8 @@ export default function PaymentForm({Introsteps}) {
         fetch('https://azurereverse.mercelab.com/api/v1/service/aks-shippingia/score', {
           method: 'POST',
           headers: {
+            'Authorization': 'Bearer 7fSDPRkvyknLR5qWvDtQ6gcB8J7sTb4T',
             'Content-Type': 'application/json',
-            'Bearer': '7fSDPRkvyknLR5qWvDtQ6gcB8J7sTb4T'
           },
           body: JSON.stringify({
             "Inputs": {
