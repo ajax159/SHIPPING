@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://azurereverse.mercelab.com/:splat"
+  to = "http://158.23.249.180/:splat"
   status = 200
   force = true
