@@ -121,6 +121,7 @@ export default function PaymentForm({Introsteps}) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer 7fSDPRkvyknLR5qWvDtQ6gcB8J7sTb4T'
           },
           body: JSON.stringify({
             "Inputs": {
