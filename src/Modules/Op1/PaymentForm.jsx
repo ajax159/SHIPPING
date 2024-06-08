@@ -127,13 +127,13 @@ export default function PaymentForm({Introsteps}) {
             "Inputs": {
               "input1": [
                 {
-                  "service": transportType,
-                  "size": packageSize,
-                  "lenght": length,
-                  "width": width,
-                  "tall": height,
-                  "weight": weight,
-                  "distance": distance
+                  "service": 1,
+                  "size": 2,
+                  "lenght": 42,
+                  "width": 32,
+                  "tall": 26,
+                  "weight": 17.138,
+                  "distance": 207.0
                 }
               ]
             },
