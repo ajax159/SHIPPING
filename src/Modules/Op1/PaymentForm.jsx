@@ -117,7 +117,7 @@ export default function PaymentForm({Introsteps}) {
     } else{
       setTransportType(transportType);
       try {
-        fetch('http://190.223.58.252:5000/api/v1/service/aks-shippingia/score', {
+        fetch('https://azurereverse.mercelab.com/api/v1/service/aks-shippingia/score', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
