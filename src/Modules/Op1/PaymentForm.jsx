@@ -117,7 +117,7 @@ export default function PaymentForm({Introsteps}) {
     } else{
       setTransportType(transportType);
       try {
-        fetch('https://azurereverse.mercelab.com/api/v1/service/aks-shippingia/score', {
+        fetch('/api/v1/service/aks-shippingia/score', {
           method: 'POST',
           headers: {
             'Authorization': 'Bearer 7fSDPRkvyknLR5qWvDtQ6gcB8J7sTb4T',
