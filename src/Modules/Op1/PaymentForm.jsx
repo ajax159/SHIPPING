@@ -124,13 +124,20 @@ export default function PaymentForm({Introsteps}) {
             'Bearer': '7fSDPRkvyknLR5qWvDtQ6gcB8J7sTb4T'
           },
           body: JSON.stringify({
-            "service": transportType,
-            "size": size,
-            "lenght": length,
-            "width": width,
-            "tall": height,
-            "weight": weight,
-            "distance": distance
+            "Inputs": {
+              "input1": [
+                {
+                  "service": transportType,
+                  "size": packageSize,
+                  "lenght": length,
+                  "width": width,
+                  "tall": height,
+                  "weight": weight,
+                  "distance": distance
+                }
+              ]
+            },
+            "GlobalParameters": {}
           }),
         })
         .then(response => response.json())
