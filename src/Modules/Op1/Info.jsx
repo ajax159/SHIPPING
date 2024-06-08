@@ -21,7 +21,9 @@ import { Steps } from 'intro.js-react';
 
 let socket;
 
+// eslint-disable-next-line react/prop-types
 const Info= ({ Introsteps }) => {
+  // eslint-disable-next-line no-unused-vars
   const { weight, width, height, length, setLength, setWidth, setHeight, setWeight, setSize } = useStore();
   const [introEnabled, setIntroEnabled] = useState(true);
 
@@ -68,7 +70,7 @@ const Info= ({ Introsteps }) => {
       stopCamera();
     };
   }, []);
-
+// eslint-disable-next-line no-unused-vars
   const setDimensiones = () => {
     if (socket) {
       socket.on('object_dimensions', (data) => {

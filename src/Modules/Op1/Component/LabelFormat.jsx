@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import useStore from '../../../Hooks/useStore';
-import {useState} from 'react';
 
 const LabelFormat = React.forwardRef((props, ref) => {
     const { logo, barcode, qr, originAddress, destinationAddress,  idreceptor, firstname, lastname, phone, size} = useStore();

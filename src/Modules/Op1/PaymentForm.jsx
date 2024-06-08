@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 
 import Box from '@mui/material/Box';
 import { Card as MuiCard } from '@mui/material';
@@ -10,7 +10,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import RadioGroup from '@mui/material/RadioGroup';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useEffect, forwardRef, useImperativeHandle, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import useStore from '../../Hooks/useStore';
 import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded';
@@ -75,10 +75,12 @@ const FormGrid = styled('div')(() => ({
   display: 'flex',
   flexDirection: 'column',
 }));
-
+// eslint-disable-next-line no-unused-vars, react/prop-types
 export default function PaymentForm({Introsteps}) {
+  // eslint-disable-next-line no-unused-vars
   const { setCostwadd,distance, setDistance ,rateKm, setRateKm,size, rateKg, setRateKg, additionalCharges, setAdditionalCharges, transportType, setTransportType, km, setKm, kg, setKg, cost, setCost, width, height, length, weight  } = useStore();
   const [introEnabled, setIntroEnabled] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [dimensions, setDimensions] = useState(true);
 
   const onExit = () => {

@@ -10,6 +10,7 @@ import useStore from '../../Hooks/useStore';
 import { Steps } from 'intro.js-react';
 
 
+// eslint-disable-next-line react/prop-types
 export default function Review({Introsteps}) {
   const {length, width, height, weight, duration, distance,costwadd, additionalCharges, cost, originAddress, destinationAddress, idreceptor, firstname, lastname, phone} = useStore();
   
