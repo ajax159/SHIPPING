@@ -190,7 +190,7 @@ export default function PaymentForm({Introsteps}) {
         >
           <Card >
             <CardActionArea
-              onClick={() => handlePaymentTypeChange(2)}
+              onClick={() => handlePaymentTypeChange(3)}
               sx={{
                 '.MuiCardActionArea-focusHighlight': {
                   backgroundColor: 'transparent',
@@ -216,7 +216,7 @@ export default function PaymentForm({Introsteps}) {
           </Card>
           <Card>
             <CardActionArea
-              onClick={() => handlePaymentTypeChange(3)}
+              onClick={() => handlePaymentTypeChange(2)}
               sx={{
                 '.MuiCardActionArea-focusHighlight': {
                   backgroundColor: 'transparent',
