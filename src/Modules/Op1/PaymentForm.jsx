@@ -10,7 +10,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import RadioGroup from '@mui/material/RadioGroup';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import useStore from '../../Hooks/useStore';
 import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded';
@@ -141,7 +141,8 @@ export default function PaymentForm({Introsteps}) {
           }),
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => setCost(data.Results.output1[0].Scored_Label))
+        
         .catch((error) => {
           console.error('Error:', error);
         });
@@ -150,14 +151,6 @@ export default function PaymentForm({Introsteps}) {
       }
     }
   };
-
-  useEffect(() => {
-    const calculatedCost = (rateKm * distance) + (rateKg * kg) + additionalCharges;
-    const calculatedCostwadd = (rateKm * distance) + (rateKg * kg);
-    setCostwadd(Math.floor(calculatedCostwadd));
-    setCost(Math.floor(calculatedCost));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rateKm, rateKg, distance, kg, additionalCharges]);
 
   return (
     <Stack spacing={{ xs: 1, sm: 6 }} useFlexGap>
