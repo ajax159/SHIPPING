@@ -37,7 +37,7 @@ const Info= ({ Introsteps }) => {
 
   const startCamera = () => {
     if (!isCameraRunning.current) {
-      socket = io('https://python-ml.azurewebsites.net');
+      socket = io('https://helloworld-g5wptzyyuq-ue.a.run.app/');
 
       socket.on('frame', (data) => {
         setImage(`data:image/jpeg;base64,${data.image}`);
