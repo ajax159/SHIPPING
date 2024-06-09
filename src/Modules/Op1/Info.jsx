@@ -4,13 +4,17 @@ import { Box, Button, Card, CardContent, CardMedia, Grid, Skeleton, Typography, 
 import useStore from '../../Hooks/useStore';
 import { Steps } from 'intro.js-react';
 import caja from '../../assets/CAJA1.jpg';
+import boxex from '../../assets/CAJAej.jpg';
 
 let socket;
 
+
+// eslint-disable-next-line react/prop-types
 const Info = ({ Introsteps }) => {
+  // eslint-disable-next-line no-unused-vars
   const { weight, width, height, length, setLength, setWidth, setHeight, setWeight, setSize } = useStore();
   const [introEnabled, setIntroEnabled] = useState(true);
-  const [image, setImage] = useState(caja);
+  const [image, setImage] = useState(boxex);
   const isCameraRunning = useRef(false);
   const videoRef = useRef(null);
   const [loading, setLoading] = useState(false);
