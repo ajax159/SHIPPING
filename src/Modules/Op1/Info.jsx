@@ -1,34 +1,18 @@
-import * as React from 'react';
-import List from '@mui/material/List';
-import Grid from '@mui/material/Grid';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import React, { useEffect, useRef, useState } from 'react';
+import { io } from 'socket.io-client';
+import { Box, Button, Card, CardContent, CardMedia, Grid, Skeleton, Typography, List, ListItem, ListItemText, OutlinedInput } from '@mui/material';
 import useStore from '../../Hooks/useStore';
-import Skeleton from '@mui/material/Skeleton';
-import { useEffect, useState, useRef } from 'react';
-import io from 'socket.io-client';
-import { Box } from '@mui/material';
-import caja from '../../assets/CAJA1.jpg';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import { Steps } from 'intro.js-react';
-
-
+import caja from '../../assets/CAJA1.jpg';
 
 let socket;
 
-// eslint-disable-next-line react/prop-types
-const Info= ({ Introsteps }) => {
-  // eslint-disable-next-line no-unused-vars
+const Info = ({ Introsteps }) => {
   const { weight, width, height, length, setLength, setWidth, setHeight, setWeight, setSize } = useStore();
   const [introEnabled, setIntroEnabled] = useState(true);
-
   const [image, setImage] = useState(caja);
   const isCameraRunning = useRef(false);
+  const videoRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
   const onExit = () => {
@@ -37,25 +21,64 @@ const Info= ({ Introsteps }) => {
 
   const startCamera = () => {
     if (!isCameraRunning.current) {
-      socket = io('https://helloworld-g5wptzyyuq-ue.a.run.app/');
+      socket = io('http://190.223.58.252:5000', {
+        // Ajusta las opciones de la conexión según sea necesario
+        mode: 'no-cors',
+        transports: ['websocket'],
+      });
 
       socket.on('frame', (data) => {
         setImage(`data:image/jpeg;base64,${data.image}`);
         setLoading(false);
       });
-      setLoading(true);
-      socket.emit('start_camera');
-      isCameraRunning.current = true;
+
+      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
+        isCameraRunning.current = true;
+        setLoading(true);
+        captureFrames();
+      }).catch((error) => {
+        console.error('Error accessing camera:', error);
+      });
     }
   };
 
   const stopCamera = () => {
-    if (isCameraRunning.current && socket) {
-      socket.emit('stop_camera');
-      socket.off('frame');
-      socket.disconnect();
+    if (isCameraRunning.current) {
+      clearInterval(isCameraRunning.current);
       isCameraRunning.current = false;
     }
+  };
+
+  const captureFrames = () => {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+  
+    const captureFrame = () => {
+      if (!isCameraRunning.current) return;
+  
+      const video = videoRef.current;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = canvas.toDataURL('image/jpeg');
+  
+      if (imageData) {
+        console.log('Captured frame:', imageData.slice(0, 100)); // Mostrar los primeros 100 caracteres
+        socket.emit('camera_stream', { image_data: imageData });
+      } else {
+        console.error('Error capturing frame.');
+      }
+    };
+  
+    // Capturar y enviar un frame cada segundo
+    const intervalId = setInterval(() => {
+      captureFrame();
+    }, 1000);
+  
+    // Almacenar el ID del intervalo para poder limpiarlo más tarde
+    isCameraRunning.current = intervalId;
   };
 
   useEffect(() => {
@@ -70,37 +93,42 @@ const Info= ({ Introsteps }) => {
       stopCamera();
     };
   }, []);
-// eslint-disable-next-line no-unused-vars
+
   const setDimensiones = () => {
+    console.log('no...');
     if (socket) {
+      console.log('Calculating dimensions...');
       socket.on('object_dimensions', (data) => {
         setWidth(Math.floor(data.width));
         setHeight(Math.floor(data.height));
         setLength(Math.floor(data.length));
       });
     }
+    postImage();
   };
 
   const postImage = async () => {
     const formData = new FormData();
     formData.append('image', image);
-    
+
     try {
       const response = await fetch('https://shippingiav2-app.azurewebsites.net/upload', {
         method: 'POST',
         body: formData,
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
       setSize(data.tagname);
+      console.log(data.tagname);
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
   return (
     <React.Fragment>
       <Steps
@@ -111,18 +139,15 @@ const Info= ({ Introsteps }) => {
       />
       <Grid container spacing={3} direction="column">
         <Grid item xs={12}>
-
           <Card style={{ backgroundColor: 'rgb(9, 14, 16)' }} id='step-1'>
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Button id='step-2' variant="contained" color="primary" onClick={startCamera} sx={{ marginBottom: 1 }}>
                   Start
                 </Button>
-
                 <Button id='step-3' variant="contained" color="secondary" onClick={stopCamera} sx={{ marginBottom: 1 }}>
                   Stop
                 </Button>
-
               </Box>
               {loading ? (
                 <Skeleton variant="rounded" width="400px" height='250px' animation="wave" sx={{marginBottom: 1}} />
@@ -136,7 +161,7 @@ const Info= ({ Introsteps }) => {
                 />
               )}
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Button id='step-4' variant="outlined" color="primary" onClick={postImage}>
+                <Button id='step-4' variant="outlined" color="primary" onClick={setDimensiones}>
                   Calculate Dimensions
                 </Button>
               </Box>
@@ -202,8 +227,9 @@ const Info= ({ Introsteps }) => {
           </Box>
         </Grid>
       </Grid>
+      <video ref={videoRef} style={{ display: 'none' }}></video>
     </React.Fragment>
   );
-}
+};
 
 export default Info;
