@@ -99,9 +99,7 @@ const Info = ({ Introsteps }) => {
   }, []);
 
   const setDimensiones = () => {
-    console.log('no...');
     if (socket) {
-      console.log('Calculating dimensions...');
       socket.on('object_dimensions', (data) => {
         setWidth(Math.floor(data.width));
         setHeight(Math.floor(data.height));

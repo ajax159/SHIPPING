@@ -313,11 +313,8 @@ export default function PaymentForm({Introsteps}) {
                   id="Size"
                   autoComplete="Size"
                   required
-                  value={kg}
+                  value={size}
                   disabled
-                  onChange={(event) => {
-                    setKg(Number(event.target.value));
-                  }}
                 />
               </FormGrid>
             </Box>
