@@ -141,7 +141,23 @@ export default function PaymentForm({Introsteps}) {
           }),
         })
         .then(response => response.json())
-        .then(data => setCost(data.Results.output1[0].Scored_Label))
+      //   {
+      //     "Results": {
+      //         "WebServiceOutput0": [
+      //             {
+      //                 "Scored Labels": 87.96239724592232,
+      //                 "distance": 207,
+      //                 "lenght": 42,
+      //                 "service": 1,
+      //                 "size": 2,
+      //                 "tall": 26,
+      //                 "weight": 17.138,
+      //                 "width": 32
+      //             }
+      //         ]
+      //     }
+      // }
+        .then(data => setCost(Math.floor(data.Results.WebServiceOutput0[0]['Scored Labels'])))
         
         .catch((error) => {
           console.error('Error:', error);
