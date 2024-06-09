@@ -40,14 +40,6 @@ export default function Review({Introsteps}) {
       />
       <List disablePadding>
         <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Shipping" secondary="Normal Service" />
-          <Typography variant="body2">${costwadd}</Typography>
-        </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Additional Charges" secondary="Plus taxes" />
-          <Typography variant="body2">${additionalCharges}</Typography>
-        </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             ${cost}
