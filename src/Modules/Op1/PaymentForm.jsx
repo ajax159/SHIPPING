@@ -82,6 +82,8 @@ export default function PaymentForm({Introsteps}) {
   const [introEnabled, setIntroEnabled] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [dimensions, setDimensions] = useState(true);
+  const azuremlapi = import.meta.env.VITE_REACT_APP_AZUREML_API;
+  const apikey = import.meta.env.VITE_REACT_APP_AZUREML_TOKEN;
 
   const onExit = () => {
     setIntroEnabled(true);
@@ -117,11 +119,11 @@ export default function PaymentForm({Introsteps}) {
     } else{
       setTransportType(transportType);
       try {
-        fetch('/api/v1/service/aks-shippingia/score', {
+        fetch(azuremlapi, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer 7fSDPRkvyknLR5qWvDtQ6gcB8J7sTb4T'
+            'Authorization': 'Bearer ' + apikey,
           },
           body: JSON.stringify({
             "Inputs": {

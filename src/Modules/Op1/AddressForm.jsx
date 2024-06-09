@@ -17,12 +17,13 @@ const FormGrid = styled(Grid)(() => ({
 
 // eslint-disable-next-line react/prop-types
 const AddressForm = forwardRef(({Introsteps}, ref) => {
-  const [url] = useState("https://randomuser.me/api/");
   const { idreceptor,setIdReceptor, setFirstname, setLastname, setPhone } = useStore();
   const [name, setName] = useState('');
   const [lname, setLname] = useState('');
   const [cellphone, setCellphone] = useState('');
   const [introEnabled, setIntroEnabled] = useState(true);
+  const api = import.meta.env.VITE_REACT_APP_RANDOPERSONAPI_URL;
+
 
   useImperativeHandle(ref, () => ({
     isValid() {
@@ -36,7 +37,7 @@ const AddressForm = forwardRef(({Introsteps}, ref) => {
 
 
   const getData = () => {
-    fetch(url).then(response => response.json()).then(data => {
+    fetch(api).then(response => response.json()).then(data => {
       setFirstname(data.results[0].name.first);
       setName(data.results[0].name.first);
       setLastname(data.results[0].name.last);

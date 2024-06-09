@@ -4,7 +4,6 @@ import { Box, Button, Card, CardContent, CardMedia, Grid, Skeleton, Typography, 
 import useStore from '../../Hooks/useStore';
 import { Steps } from 'intro.js-react';
 import caja from '../../assets/CAJA1.jpg';
-import boxex from '../../assets/CAJAej.jpg';
 
 let socket;
 
@@ -14,10 +13,12 @@ const Info = ({ Introsteps }) => {
   // eslint-disable-next-line no-unused-vars
   const { weight, width, height, length, setLength, setWidth, setHeight, setWeight, setSize } = useStore();
   const [introEnabled, setIntroEnabled] = useState(true);
-  const [image, setImage] = useState(boxex);
+  const [image, setImage] = useState(caja);
   const isCameraRunning = useRef(false);
   const videoRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const websocket = import.meta.env.VITE_REACT_APP_WEBSOCKET;
+  const api = import.meta.env.VITE_REACT_APP_AZUREVISION_API;
 
   const onExit = () => {
     setIntroEnabled(true);
@@ -25,7 +26,7 @@ const Info = ({ Introsteps }) => {
 
   const startCamera = () => {
     if (!isCameraRunning.current) {
-      socket = io('http://190.223.58.252:5000', {
+      socket = io(websocket, {
         // Ajusta las opciones de la conexión según sea necesario
         mode: 'no-cors',
         transports: ['websocket'],
@@ -114,7 +115,7 @@ const Info = ({ Introsteps }) => {
     formData.append('image', image);
 
     try {
-      const response = await fetch('https://shippingiav2-app.azurewebsites.net/upload', {
+      const response = await fetch(api, {
         method: 'POST',
         body: formData,
       });

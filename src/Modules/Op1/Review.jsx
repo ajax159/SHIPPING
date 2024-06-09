@@ -12,7 +12,7 @@ import { Steps } from 'intro.js-react';
 
 // eslint-disable-next-line react/prop-types
 export default function Review({Introsteps}) {
-  const {length, width, height, weight, duration, distance,costwadd, additionalCharges, cost, originAddress, destinationAddress, idreceptor, firstname, lastname, phone} = useStore();
+  const {length, width, height, weight, duration, distance, cost, originAddress, destinationAddress, idreceptor, firstname, lastname, phone} = useStore();
   
   const [estimation, setEstimation] = React.useState();
   const [introEnabled, setIntroEnabled] = React.useState(true);

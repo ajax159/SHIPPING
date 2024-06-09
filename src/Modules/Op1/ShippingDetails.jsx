@@ -18,15 +18,14 @@ const FormGrid = styled(Grid)(() => ({
 
 const center = { lat: 48.8584, lng: 2.2945 };
 
+
+// eslint-disable-next-line react/prop-types
 const ShippingDetails = forwardRef(({Introsteps}, ref) => {
-  // const [origin, setOrigin] = useState(null);
-  // const [destination, setDestination] = useState(null);
-  // const [map, setMap] = useState(null);
   const { setDuration, setDistance, directionsDisplay, setDirectionsDisplay, originAddress, destinationAddress, setOriginAddress, setDestinationAddress, origin, setOrigin, destination, setDestination, map, setMap } = useStore();
-  //const directionsDisplayRef = useRef(null);
   const autocompleteOriginRef = useRef(null);
   const autocompleteDestinationRef = useRef(null);
   const [introEnabled, setIntroEnabled] = useState(true);
+  const mapkey = import.meta.env.VITE_REACT_APP_MAP_KEY;
 
   const onExit = () => {
     setIntroEnabled(true);
@@ -42,7 +41,7 @@ const ShippingDetails = forwardRef(({Introsteps}, ref) => {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyCdOkR2-o0nEz-Sy9yuD1LsAoTuUkxrwxY",
+    googleMapsApiKey: mapkey,
     libraries: ['places']
   });
 
@@ -172,7 +171,7 @@ const ShippingDetails = forwardRef(({Introsteps}, ref) => {
         </Autocomplete>
       </FormGrid>
       <FormGrid item xs={12} id='step-destination'>
-        <FormLabel htmlFor="destino">Ubicacion Destino</FormLabel>
+        <FormLabel htmlFor="destino">Destination</FormLabel>
         <Autocomplete
           onPlaceChanged={onPlaceChangedDestination}
           onLoad={onLoadDestination}
