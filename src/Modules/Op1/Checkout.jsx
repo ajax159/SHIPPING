@@ -14,7 +14,6 @@ import Stepper from '@mui/material/Stepper';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import AddressForm from './AddressForm';
@@ -22,8 +21,7 @@ import Info from './Info';
 import InfoMobile from './InfoMobile';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-import ToggleColorMode from './ToggleColorMode';
-import SitemarkIcon from './SitemarkIcon';
+
 import ShippingDetails from './ShippingDetails';
 import LabelFormat from './Component/LabelFormat';
 import { useReactToPrint } from 'react-to-print';
@@ -83,7 +81,7 @@ function getStepContent(step, refs, introSteps, shippingSteps, transportDetailsS
 
 
 export default function Checkout() {
-  const [mode, setMode] = useState('dark');
+  const [mode] = useState('dark');
   const [showCustomTheme, setShowCustomTheme] = useState(true);
   const defaultTheme = createTheme({ palette: { mode } });
   const [activeStep, setActiveStep] = useState(0);
@@ -203,9 +201,7 @@ export default function Checkout() {
       content: () => componentRef.current,
   });
 
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+
 
   const toggleCustomTheme = () => {
     setShowCustomTheme((prev) => !prev);
@@ -284,25 +280,7 @@ export default function Checkout() {
           width: '100%',
         }}
       >
-        <Box
-          sx={{
-            display: { xs: 'flex', md: 'none' },
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Button
-            startIcon={<ArrowBackRoundedIcon />}
-            component="a"
-            href="/material-ui/getting-started/templates/"
-            sx={{ alignSelf: 'start' }}
-          >
-            Back to
-            <SitemarkIcon />
-          </Button>
-          <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-        </Box>
+
         <Box
           sx={{
             display: { md: 'flex' },

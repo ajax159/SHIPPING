@@ -27,7 +27,6 @@ const Info = ({ Introsteps }) => {
   const startCamera = () => {
     if (!isCameraRunning.current) {
       socket = io(websocket, {
-        // Ajusta las opciones de la conexión según sea necesario
         mode: 'no-cors',
         transports: ['websocket'],
       });
@@ -163,9 +162,14 @@ const Info = ({ Introsteps }) => {
                   sx={{ width: '400px', height: '250px', marginBottom: 1, borderRadius: '10px'}}
                 />
               )}
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Button id='step-4' variant="outlined" color="primary" onClick={setDimensiones}>
+              <Box sx={{ display: 'flex',justifyContent: 'center' }}>
+                <Button
+                id='step-4'
+                variant="outlined"
+                color="primary"
+                onClick={setDimensiones}>
                   Calculate Dimensions
+                
                 </Button>
               </Box>
             </CardContent>
