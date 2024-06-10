@@ -17,6 +17,7 @@ const Info = ({ Introsteps }) => {
   const isCameraRunning = useRef(false);
   const videoRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const websocket = import.meta.env.VITE_REACT_APP_WEBSOCKET;
   const api = import.meta.env.VITE_REACT_APP_AZUREVISION_API;
 
@@ -26,7 +27,7 @@ const Info = ({ Introsteps }) => {
 
   const startCamera = () => {
     if (!isCameraRunning.current) {
-      socket = io(websocket, {
+      socket = io('https://odshipping.onrender.com', {
         mode: 'no-cors',
         transports: ['websocket'],
       });
