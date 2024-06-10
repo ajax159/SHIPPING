@@ -93,12 +93,12 @@ export default function Checkout() {
     {
       title: 'Welcome to Shipping AI',
       element: '#step-1',
-      intro: 'Iniciemos por escanear nuestro paquete',
+      intro: 'This is a step-by-step guide to help you create a new order',
     },
     {
       title: 'Start scanning',
       element: '#step-2',
-      intro: 'Click en el botón de Start para iniciar el escaneo',
+      intro: 'Click on the Start button to start scanning the package',
     },
     {
       title: 'Revies the package',
@@ -108,17 +108,17 @@ export default function Checkout() {
     {
       title: 'Calculate Dimensions',
       element: '#step-4',
-      intro: 'Click en el botón de Calculate Dimensions para obtener las dimensiones del paquete',
+      intro: 'Click on the Calculate Dimensions button to get the package dimensions',
     },
     {
       title: 'Stop scanning',
       element: '#step-3',
-      intro: 'Click en el botón de Stop para detener el escaneo',
+      intro: 'Click on the Stop button to stop the scanning process',
     },
     {
       title: 'Review Package Details',
       element: '#step-5',
-      intro: 'Ahora que tienes el ancho, alto y largo de tu paquete, por favor llena el peso aproximado de tu paquete',
+      intro: 'Now you can review the package details before clicking Next',
     },
     {
       title: 'Weight details',
