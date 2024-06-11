@@ -64,7 +64,7 @@ const AddressForm = forwardRef(({Introsteps}, ref) => {
         <OutlinedInput
           id="sender-id"
           name="sender-id"
-          type="text"
+          type="number"
           placeholder="000000000"
           autoComplete="first name"
           value={idreceptor}

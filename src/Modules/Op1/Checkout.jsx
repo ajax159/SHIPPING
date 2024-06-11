@@ -101,9 +101,9 @@ export default function Checkout() {
       intro: 'Click on the Start button to start scanning the package',
     },
     {
-      title: 'Revies the package',
+      title: 'Review the package',
       element: '#step-py',
-      intro: 'Arrange the package until it matches the three yellow corners',
+      intro: 'Arrange the package until it matches the three yellow corners. Remember that you need a 5x5 cm "<a href="https://chev.me/arucogen/" target="_blank">ArUco</a>" near the package so that it can be scanned correctly.',
     },
     {
       title: 'Calculate Dimensions',
