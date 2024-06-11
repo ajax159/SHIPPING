@@ -47,7 +47,7 @@ const Info = ({ Introsteps }) => {
       return;
     } else {
       if (!isCameraRunning.current) {
-        socket = io('https://azurereverse.mercelab.com/', {
+        socket = io('https://odshipping.onrender.com', {
           mode: 'no-cors',
           transports: ['websocket'],
         });
