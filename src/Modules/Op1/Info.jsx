@@ -3,7 +3,9 @@ import { io } from 'socket.io-client';
 import { Box, Button, Card, CardContent, CardMedia, Grid, Skeleton, Typography, List, ListItem, ListItemText, OutlinedInput } from '@mui/material';
 import useStore from '../../Hooks/useStore';
 import { Steps } from 'intro.js-react';
+import Select from '@mui/material/Select';
 import caja from '../../assets/CAJA1.jpg';
+import MenuItem from '@mui/material/MenuItem';
 
 let socket;
 
@@ -17,6 +19,8 @@ const Info = ({ Introsteps }) => {
   const isCameraRunning = useRef(false);
   const videoRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [cameralist, setCameralist] = useState([]);
+  const [camera, setCamera] = useState('0');
   // eslint-disable-next-line no-unused-vars
   const websocket = import.meta.env.VITE_REACT_APP_WEBSOCKET;
   const api = import.meta.env.VITE_REACT_APP_AZUREVISION_API;
@@ -25,28 +29,46 @@ const Info = ({ Introsteps }) => {
     setIntroEnabled(true);
   };
 
+  //Load media cameralists conected to pc
+  useEffect(() => {
+    navigator.mediaDevices.enumerateDevices()
+      .then(devices => {
+        const cameras = devices.filter(device => device.kind === 'videoinput');
+        setCameralist(cameras);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, [])
+
   const startCamera = () => {
-    if (!isCameraRunning.current) {
-      socket = io('https://odshipping.onrender.com', {
-        mode: 'no-cors',
-        transports: ['websocket'],
-      });
-
-      socket.on('frame', (data) => {
-        setImage(`data:image/jpeg;base64,${data.image}`);
-        setLoading(false);
-      });
-
-      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-        videoRef.current.srcObject = stream;
-        videoRef.current.play();
-        isCameraRunning.current = true;
-        setLoading(true);
-        captureFrames();
-      }).catch((error) => {
-        console.error('Error accessing camera:', error);
-      });
+    if (camera === '0') {
+      alert('Select a camera');
+      return;
+    } else {
+      if (!isCameraRunning.current) {
+        socket = io('https://odshipping.onrender.com', {
+          mode: 'no-cors',
+          transports: ['websocket'],
+        });
+  
+        socket.on('frame', (data) => {
+          setImage(`data:image/jpeg;base64,${data.image}`);
+          setLoading(false);
+        });
+  
+        navigator.mediaDevices.getUserMedia({ video: { deviceId: camera } }).then((stream) => {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play();
+          isCameraRunning.current = true;
+          setLoading(true);
+          captureFrames();
+        }).catch((error) => {
+          console.error('Error accessing camera:', error);
+        });
+      }
     }
+
   };
 
   const stopCamera = () => {
@@ -148,6 +170,17 @@ const Info = ({ Introsteps }) => {
                 <Button id='step-2' variant="contained" color="primary" onClick={startCamera} sx={{ marginBottom: 1 }}>
                   Start
                 </Button>
+                <Select
+                  id='cameras'
+                  value={camera}
+                  onChange={(event) => setCamera(event.target.value)}
+                  sx={{ marginBottom: 1, width: '200px'}}
+                >
+                  <MenuItem  value='0'>Select a Camera</MenuItem>
+                  {cameralist.map((camera, index) => (
+                    <MenuItem key={index} value={camera.deviceId}>{camera.label}</MenuItem>
+                  ))}
+                </Select>
                 <Button id='step-3' variant="contained" color="secondary" onClick={stopCamera} sx={{ marginBottom: 1 }}>
                   Stop
                 </Button>
