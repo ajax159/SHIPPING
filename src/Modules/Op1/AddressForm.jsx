@@ -21,7 +21,7 @@ const AddressForm = forwardRef(({Introsteps}, ref) => {
   const [name, setName] = useState('');
   const [lname, setLname] = useState('');
   const [cellphone, setCellphone] = useState('');
-  const [introEnabled, setIntroEnabled] = useState(true);
+  const [introEnabled, setIntroEnabled] = useState();
   const api = import.meta.env.VITE_REACT_APP_RANDOPERSONAPI_URL;
 
 

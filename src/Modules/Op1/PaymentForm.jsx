@@ -79,9 +79,9 @@ const FormGrid = styled('div')(() => ({
 export default function PaymentForm({Introsteps}) {
   // eslint-disable-next-line no-unused-vars
   const { setCostwadd,distance, setDistance ,rateKm, setRateKm,size, rateKg, setRateKg, additionalCharges, setAdditionalCharges, transportType, setTransportType, km, setKm, kg, setKg, cost, setCost, width, height, length, weight  } = useStore();
-  const [introEnabled, setIntroEnabled] = useState(true);
+  const [introEnabled, setIntroEnabled] = useState();
   // eslint-disable-next-line no-unused-vars
-  const [dimensions, setDimensions] = useState(true);
+  const [dimensions, setDimensions] = useState();
   const azuremlapi = import.meta.env.VITE_REACT_APP_AZUREML_API;
   const apikey = import.meta.env.VITE_REACT_APP_AZUREML_TOKEN;
 

@@ -32,6 +32,7 @@ const useStore = create((set) => ({
   width: 11,
   height: 4,
   weight: 0,
+  introEnabled: true,
   setIdReceptor: (idreceptor) => set({ idreceptor }),
   setFirstname: (firstname) => set({ firstname }),
   setLastname: (lastname) => set({ lastname }),
@@ -57,6 +58,7 @@ const useStore = create((set) => ({
   setWidth: (width) => set({ width }),
   setHeight: (height) => set({ height }),
   setWeight: (weight) => set({ weight }),
+  setIntroEnabled: (introEnabled) => set({ introEnabled }),
 }));
 
 export default useStore;

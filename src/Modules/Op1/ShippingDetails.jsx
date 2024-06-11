@@ -24,7 +24,7 @@ const ShippingDetails = forwardRef(({Introsteps}, ref) => {
   const { setDuration, setDistance, directionsDisplay, setDirectionsDisplay, originAddress, destinationAddress, setOriginAddress, setDestinationAddress, origin, setOrigin, destination, setDestination, map, setMap } = useStore();
   const autocompleteOriginRef = useRef(null);
   const autocompleteDestinationRef = useRef(null);
-  const [introEnabled, setIntroEnabled] = useState(true);
+  const [introEnabled, setIntroEnabled] = useState();
   const mapkey = import.meta.env.VITE_REACT_APP_MAP_KEY;
 
   const onExit = () => {

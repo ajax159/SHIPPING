@@ -14,7 +14,7 @@ let socket;
 const Info = ({ Introsteps }) => {
   // eslint-disable-next-line no-unused-vars
   const { weight, width, height, length, setLength, setWidth, setHeight, setWeight, setSize } = useStore();
-  const [introEnabled, setIntroEnabled] = useState(true);
+  const [introEnabled, setIntroEnabled] = useState();
   const [image, setImage] = useState(caja);
   const isCameraRunning = useRef(false);
   const videoRef = useRef(null);
@@ -164,17 +164,16 @@ const Info = ({ Introsteps }) => {
       />
       <Grid container spacing={3} direction="column">
         <Grid item xs={12}>
-          <Card style={{ backgroundColor: 'rgb(9, 14, 16)' }} id='step-1'>
+          <Card sx={{ backgroundColor: 'rgb(9, 14, 16)', width: '100%' }} id='step-1'>
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Button id='step-2' variant="contained" color="primary" onClick={startCamera} sx={{ marginBottom: 1 }}>
                   Start
                 </Button>
                 <Select
-                  id='cameras'
                   value={camera}
                   onChange={(event) => setCamera(event.target.value)}
-                  sx={{ marginBottom: 1, width: '200px'}}
+                  sx={{ marginBottom: 1, px: 0.5}}
                 >
                   <MenuItem  value='0'>Select a Camera</MenuItem>
                   {cameralist.map((camera, index) => (
@@ -186,14 +185,14 @@ const Info = ({ Introsteps }) => {
                 </Button>
               </Box>
               {loading ? (
-                <Skeleton variant="rounded" width="400px" height='250px' animation="wave" sx={{marginBottom: 1}} />
+                <Skeleton variant="rounded" width="100%" height='250px' animation="wave" sx={{marginBottom: 1}} />
               ) : (
                 <CardMedia
                   id='step-py'
                   component="img"
                   image={image}
                   alt="Camera Feed"
-                  sx={{ width: '400px', height: '250px', marginBottom: 1, borderRadius: '10px'}}
+                  sx={{ width: '100%', marginBottom: 1, borderRadius: '10px'}}
                 />
               )}
               <Box sx={{ display: 'flex',justifyContent: 'center' }}>

@@ -8,6 +8,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
@@ -21,7 +22,7 @@ import Info from './Info';
 import InfoMobile from './InfoMobile';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import ShippingDetails from './ShippingDetails';
 import LabelFormat from './Component/LabelFormat';
 import { useReactToPrint } from 'react-to-print';
@@ -87,12 +88,11 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
   const addressFormRef = useRef();
   const shippingDetailsRef = useRef();
-  const [introEnabled, setIntroEnabled] = useState(true);
+  const { introEnabled, setIntroEnabled } = useState();
 
   const introSteps = [
     {
       title: 'Welcome to Shipping AI',
-      element: '#step-1',
       intro: 'This is a step-by-step guide to help you create a new order',
     },
     {
@@ -226,6 +226,15 @@ export default function Checkout() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          right: 20,
+        }}>
+        <IconButton aria-label="delete">
+          <HelpOutlineIcon />
+        </IconButton>
+        </div>
       <Steps
         enabled={introEnabled}
         steps={introSteps}
