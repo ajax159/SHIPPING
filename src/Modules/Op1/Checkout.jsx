@@ -195,6 +195,10 @@ export default function Checkout() {
     setIntroEnabled(false);
   };
 
+  const openIntro = () => {
+    setIntroEnabled(true);
+  }
+
   const componentRef = useRef();
 
   const handlePrint = useReactToPrint({
@@ -230,8 +234,9 @@ export default function Checkout() {
           position: 'fixed',
           top: 0,
           right: 20,
+          display: 'none'
         }}>
-        <IconButton aria-label="delete">
+        <IconButton aria-label="delete" onClick={openIntro}>
           <HelpOutlineIcon />
         </IconButton>
         </div>

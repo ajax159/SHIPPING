@@ -28,6 +28,7 @@ const Info = ({ Introsteps }) => {
   const onExit = () => {
     setIntroEnabled(true);
   };
+  
 
   //Load media cameralists conected to pc
   useEffect(() => {
